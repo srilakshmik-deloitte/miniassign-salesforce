@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:salesforce="http://www.mulesoft.org/schema/mule/salesforce" xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/salesforce http://www.mulesoft.org/schema/mule/salesforce/current/mule-salesforce.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="c44d24fd-9081-4b9c-9ba4-f35e3aa63dd4" >
+		<http:listener-connection host="localhost" port="8081" />
+	</http:listener-config>
+	<salesforce:sfdc-config name="Salesforce_Config" doc:name="Salesforce Config" doc:id="88c331f5-fe92-41a2-9dca-06e712e22d27" >
+		<salesforce:basic-connection username="srkomirisetti@hashedin.com" password="srilu@851" securityToken="BtlkHAC9NNw7ieH5Pc9bbR6P9"/>
+	</salesforce:sfdc-config>
+	<flow name="createRecordFlow" doc:id="09b96900-12a1-461f-8158-02475104f0fd" >
+		<http:listener doc:name="Listener" doc:id="9d551f41-a92c-4b89-a40f-ce09a3a61fbb" config-ref="HTTP_Listener_config" path="/insert"/>
+		<salesforce:create type="Employee__c" doc:name="Create" doc:id="c6daa435-9f86-4a9f-8aee-fcc9b1d49ea4" config-ref="Salesforce_Config"/>
+		<ee:transform doc:name="Transform Message" doc:id="dff4aaf6-d61b-46b8-95e1-df91f1492423">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+	<flow name="updateRecordFlow" doc:id="6c87548a-b15a-4583-a533-8e18cbccaf3a" >
+		<http:listener doc:name="Listener" doc:id="4d8a15c9-2bb8-4050-bf02-e840951c9d52" config-ref="HTTP_Listener_config" path="/update" allowedMethods="PUT"/>
+		<salesforce:update doc:name="Update" doc:id="826b654d-4c1c-4fb9-a931-cfb08048ed09" config-ref="Salesforce_Config" type="Employee__c"/>
+		<ee:transform doc:name="Transform Message" doc:id="c58f87ce-f11c-409c-9b24-3783e7e72fe3" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	
+</flow>
+	<flow name="deleteRecordFlow" doc:id="0164fb15-dec0-423c-8d52-261bd2f082ae" >
+		
+		<http:listener doc:name="Listener" doc:id="0210b763-422f-4773-9f93-d2a916a5fe64" config-ref="HTTP_Listener_config" path="/delete" allowedMethods="DELETE"/>
+		<salesforce:delete doc:name="Delete" doc:id="8f0373b2-7f89-49b7-86a8-d05945f73af6" config-ref="Salesforce_Config">
+			<salesforce:ids ><![CDATA[#[payload.id]]]></salesforce:ids>
+		</salesforce:delete>
+		<ee:transform doc:name="Transform Message" doc:id="3dc9e27d-a889-4ccf-9f0c-507da41a5276">
+			<ee:message>
+				<ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	
+</flow>
+	<flow name="fetchRecordFlow" doc:id="05453d38-dbd0-4c1b-9d03-dfb027a5c444" >
+		<http:listener doc:name="Listener" doc:id="230e83b8-3a20-4070-8f33-a93657d76fb9" config-ref="HTTP_Listener_config" path="/fetch"/>
+		<salesforce:query doc:name="Query" doc:id="a84c3bba-624d-4df2-a282-3c90db94fe84" config-ref="Salesforce_Config" >
+			<salesforce:salesforce-query ><![CDATA[SELECT Department__c,Email__c,Employee_ID__c,Id,Name FROM Employee__c WHERE Name = ':name']]></salesforce:salesforce-query>
+			<salesforce:parameters ><![CDATA[#[{
+	"name" : payload.name
+}]]]></salesforce:parameters>
+		</salesforce:query>
+		<ee:transform doc:name="Transform Message" doc:id="ffdfd9bd-122f-4b0d-b84a-5d2b0a9fa879" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

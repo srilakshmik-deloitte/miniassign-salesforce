@@ -1,0 +1,239 @@
+{
+	"info": {
+		"_postman_id": "ea5903a5-fe9e-44eb-b745-07cf613e88ff",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "20941843",
+		"_collection_link": "https://grey-robot-491273.postman.co/workspace/Demo~edba895f-dab0-402a-acc2-de438f1242f8/collection/20941843-ea5903a5-fe9e-44eb-b745-07cf613e88ff?action=share&creator=20941843&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "mini_Salesforce",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"Employee_ID__c\": \"220017.0\",\r\n    \"Department__c\": \"IE\",\r\n    \"Email__c\": \"komirisetti@deloitte.com\",\r\n    \"Name\": \"lakshmi\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/insert"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n    \"Employee_ID__c\": \"220017.0\",\r\n    \"Department__c\": \"IE\",\r\n    \"Email__c\": \"komirisetti@deloitte.com\",\r\n    \"Name\": \"lakshmi\"\r\n}\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/insert"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 17:12:55 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": null,\n    \"items\": [\n        {\n            \"exception\": null,\n            \"message\": null,\n            \"payload\": {\n                \"success\": true,\n                \"id\": \"a005j00000MaUaQAAV\",\n                \"errors\": []\n            },\n            \"id\": \"a005j00000MaUaQAAV\",\n            \"statusCode\": null,\n            \"successful\": true\n        }\n    ],\n    \"successful\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "get",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"lakshmi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/fetch"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\":\"sri\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/fetch"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "195"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 16:56:12 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"Employee_ID__c\": \"220011.0\",\n        \"Id\": \"a005j00000MGPQuAAP\",\n        \"type\": \"Employee__c\",\n        \"Department__c\": \"IE\",\n        \"Email__c\": \"srkomirisetti@deloitte.com\",\n        \"Name\": \"sri\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n    \"id\": \"a005j00000MaUaQAAV\",\r\n    \"Employee_ID__c\": \"220017.0\",\r\n    \"Department__c\": \"SDE\",\r\n    \"Email__c\": \"lakshmi@gmail.com\",\r\n    \"Name\": \"lakshmi\"\r\n}\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/update"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n    \"id\": \"a005j00000MaUaQAAV\",\r\n    \"Employee_ID__c\": \"220017.0\",\r\n    \"Department__c\": \"SDE\",\r\n    \"Email__c\": \"lakshmi@gmail.com\",\r\n    \"Name\": \"lakshmi\"\r\n}\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/update"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 17:23:06 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": null,\n    \"items\": [\n        {\n            \"exception\": null,\n            \"message\": null,\n            \"payload\": {\n                \"success\": true,\n                \"id\": \"a005j00000MaUaQAAV\",\n                \"errors\": []\n            },\n            \"id\": \"a005j00000MaUaQAAV\",\n            \"statusCode\": null,\n            \"successful\": true\n        }\n    ],\n    \"successful\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"id\":\"a005j00000MGPkZAAX\"\r\n    }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/delete"
+					},
+					"response": [
+						{
+							"name": "Success",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\r\n    {\r\n        \"id\":\"a005j00000MGPkZAAX\"\r\n    }\r\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:8081/delete"
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "331"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Jul 2023 17:27:45 GMT"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": null,\n    \"items\": [\n        {\n            \"exception\": null,\n            \"message\": null,\n            \"payload\": {\n                \"success\": true,\n                \"id\": \"a005j00000MGPkZAAX\",\n                \"errors\": []\n            },\n            \"id\": \"a005j00000MGPkZAAX\",\n            \"statusCode\": null,\n            \"successful\": true\n        }\n    ],\n    \"successful\": true\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
